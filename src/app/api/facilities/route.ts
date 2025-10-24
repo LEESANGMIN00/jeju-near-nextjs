@@ -52,7 +52,7 @@ export async function GET(request: Request) {
 
     query += ` ORDER BY distance LIMIT 100`;
 
-    const [rows] = await connection.execute(query, params);
+    const [rows] = await connection.execute(query, params) as [any[], any];
 
     console.log(
       `${lat}, ${lng} 기준 ${radius}km 반경에서 ${rows.length}개의 시설 데이터를 가져왔습니다.`
