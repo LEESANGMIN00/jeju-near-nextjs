@@ -29,18 +29,33 @@ export default function Map() {
       );
 
       const { latitude, longitude } = position.coords;
-      setUserLocation({ lat: latitude, lng: longitude });
+      console.log(`📍 현재 위치: ${latitude}, ${longitude}`);
 
-      // 2. 제주도 범위 체크 (대략적인 좌표 범위)
+      // 테스트용: 제주도 좌표로 강제 설정 (제주시 중심)
+      const testLocation = { lat: 33.4996, lng: 126.5312 };
+      console.log(
+        `🏝️ 테스트용 제주도 위치로 설정: ${testLocation.lat}, ${testLocation.lng}`
+      );
+      setUserLocation(testLocation);
+
+      // 2. 제주도 범위 체크 (대략적인 좌표 범위) - 테스트용으로 확장
       const isInJeju =
-        latitude >= 33.1 &&
-        latitude <= 33.6 &&
-        longitude >= 126.1 &&
-        longitude <= 127.0;
+        (latitude >= 33.1 &&
+          latitude <= 33.6 &&
+          longitude >= 126.1 &&
+          longitude <= 127.0) ||
+        (latitude >= 37.0 &&
+          latitude <= 37.2 &&
+          longitude >= 128.0 &&
+          longitude <= 128.3); // 테스트용
 
-      setRegionMode(isInJeju ? "jeju" : "other");
+      console.log(
+        `🏝️ 제주도 범위 체크: ${isInJeju} (위도: ${latitude}, 경도: ${longitude})`
+      );
+      // 테스트용: 항상 제주도 모드로 설정
+      setRegionMode("jeju");
     } catch (error) {
-      console.log("위치 접근 불가, 제주도 모드로 설정");
+      console.log("위치 접근 불가, 제주도 모드로 설정", error);
       setRegionMode("jeju");
     } finally {
       setIsDetecting(false);

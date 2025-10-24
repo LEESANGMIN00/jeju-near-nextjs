@@ -42,7 +42,7 @@ export async function GET(request: Request) {
       WHERE (6371 * acos(cos(radians(?)) * cos(radians(lat)) * cos(radians(lng) - radians(?)) + sin(radians(?)) * sin(radians(lat)))) <= ?
     `;
 
-    let params = [lat, lng, lat, lat, lng, lat, radius];
+    let params: any[] = [lat, lng, lat, lat, lng, lat, radius];
 
     // 카테고리 필터링 추가
     if (category && category !== "all") {
