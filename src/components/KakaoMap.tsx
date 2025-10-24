@@ -28,7 +28,10 @@ interface Facility {
   distance?: number;
 }
 
-const KAKAO_SRC = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=15bb41100fd43f80b4123f5ea31586d7&autoload=false`;
+const KAKAO_SRC = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${
+  process.env.NEXT_PUBLIC_KAKAO_API_KEY ||
+  "15bb41100fd43f80b4123f5ea31586d7"
+}&autoload=false`;
 
 // 편의시설 아이콘 생성 함수 (이모지 사용)
 const getMarkerIcon = (category: string): string => {

@@ -29,6 +29,14 @@ export async function GET(request: Request) {
       database: dbConfig.database,
       user: dbConfig.user ? "***" : "undefined",
     });
+    
+    console.log("환경변수 확인:", {
+      DB_HOST: process.env.DB_HOST,
+      DB_PORT: process.env.DB_PORT,
+      DB_USER: process.env.DB_USER ? "***" : "undefined",
+      DB_PASSWORD: process.env.DB_PASSWORD ? "***" : "undefined",
+      DB_NAME: process.env.DB_NAME,
+    });
 
     // DB 연결
     connection = await mysql.createConnection(dbConfig);
@@ -52,7 +60,7 @@ export async function GET(request: Request) {
 
     query += ` ORDER BY distance LIMIT 100`;
 
-    const [rows] = await connection.execute(query, params) as [any[], any];
+    const [rows] = (await connection.execute(query, params)) as [any[], any];
 
     console.log(
       `${lat}, ${lng} 기준 ${radius}km 반경에서 ${rows.length}개의 시설 데이터를 가져왔습니다.`
