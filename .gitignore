@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Neon migration files
+*-for-neon.sql
+insert-*.sql
+setup-neon.js
+insert-sample-data.js
+batch-insert-neon.js
+migrate-to-neon.js
+*.csv
